@@ -1,0 +1,22 @@
+.container {
+    display: inline;
+    justify-content: center;
+    width: 600px;
+}
+
+.todo-list {
+    width: 500px;
+}
+
+.count {
+    display: inline;
+    justify-content: space-between;
+}
+
+.notDone {
+    font-style: italic;
+}
+
+.done {
+    text-decoration: line-through;
+}
