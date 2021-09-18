@@ -5,11 +5,7 @@ export const TodoListContext = createContext();
 
 const TodoListContextProvider = (props) => {
 
-    const initialState = {
-        todoList: []
-    }
-
-    const [todoList, dispatch] = useReducer(todoReducer, initialState)
+    const [todoList, dispatch] = useReducer(todoReducer, [])
 
     return (
         <TodoListContext.Provider value={{ todoState: todoList, todoDispatch: dispatch }}>

@@ -16,11 +16,11 @@ const update = (id, data) => {
   return http.put(`/${id}`, data);
 };
 
-const remove = id => {
+const deleteTodo = id => {
   return http.delete(`/${id}`);
 };
 
-const removeAll = () => {
+const deleteAll = () => {
   return http.delete("");
 };
 
@@ -29,6 +29,6 @@ export default {
   get,
   create,
   update,
-  remove,
-  removeAll,
+  deleteTodo,
+  deleteAll,
 };
