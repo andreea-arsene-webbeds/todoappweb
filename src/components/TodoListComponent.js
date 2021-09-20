@@ -17,23 +17,40 @@ const TodoList = (props) => {
 
     const todoListContext = useContext(TodoListContext)
 
-    const [list, setList] = useState([])
+    const [list, setList] = useState([]);
+    const [done, setDone] = useState(0);
+    const [notDone, setNotDone] = useState(0);
 
      useEffect(() => {
-        getTodos()
-     }, [])
+        getTodos();
+     // eslint-disable-next-line react-hooks/exhaustive-deps
+     }, [] )
      
      const getTodos = () => {
         DataService.getAll()
           .then(response => {
             setList(response.data)
+            countDone(response.data);
             todoListContext.todoDispatch({type: Action.GET, payload: response.data})
+            
           })
           .catch(e => {
             console.log(e);
           });
-
       };
+
+    const countDone = (todoList) => {
+        console.log("countdone",todoList)
+        const doneArr = todoList.filter((todo) => {
+            return todo.done === true;
+        })
+        const notDoneArr = todoList.filter((todo) => {
+            return todo.done === false;
+        })
+        setDone(doneArr.length);
+        setNotDone(notDoneArr.length)
+        todoListContext.todoDispatch({type: Action.CHECK, payload: [doneArr.length, notDoneArr.length]})
+    }
 
     const checkTodo = (id, todo, isDone) => {
         todo.done = isDone;
@@ -52,40 +69,39 @@ const TodoList = (props) => {
 
     return (
         <div className="container">
-            {/* <div className="count">
-                <p>To do: {toDo}</p>
+            <div className="count">
+                <p>To do: {notDone}</p>
                 <p>Done: {done}</p>
-            </div> */}
-                <List className="todo-list">
-                    {list?.map(todo => {
-                        let completed = todo.done ? "done" : "notDone";
-                        return (
-                            <ListItem key={todo.id} role={undefined} dense button>
-                                <ListItemIcon>
-                                    <Checkbox
-                                        edge="start"
-                                        checked={todo.done === 1}
-                                        tabIndex={-1}
-                                        disableRipple
-                                        onClick={() => {
-                                            checkTodo(todo.id, todo, !todo.done)
-                                            }
+            </div>
+            <List>
+                {list?.map(todo => {
+                    let completed = todo.done ? "done" : "notDone";
+                    return (
+                        <ListItem key={todo.id} role={undefined} dense button>
+                            <ListItemIcon>
+                                <Checkbox
+                                    checked={todo.done === 1}
+                                    tabIndex={-1}
+                                    disableRipple
+                                    onClick={() => {
+                                        checkTodo(todo.id, todo, !todo.done)
                                         }
-                                    />
-                                </ListItemIcon>
-                                <ListItemText className={completed} id={todo.id} primary={todo.text} />
-                                <ListItemSecondaryAction>
-                                    <IconButton edge="end" onClick={() => {
-                                            deleteTodo(todo.id)
-                                            }
-                                        }>
-                                        <DeleteForeverRoundedIcon />
-                                    </IconButton>
-                                </ListItemSecondaryAction>
-                            </ListItem>
-                        );
-                    })}
-                </List>
+                                    }
+                                />
+                            </ListItemIcon>
+                            <ListItemText className={completed} id={todo.id} primary={todo.text} />
+                            <ListItemSecondaryAction>
+                                <IconButton onClick={() => {
+                                        deleteTodo(todo.id)
+                                        }
+                                    }>
+                                    <DeleteForeverRoundedIcon />
+                                </IconButton>
+                            </ListItemSecondaryAction>
+                        </ListItem>
+                    );
+                })}
+            </List>
         </div>
     );
 }

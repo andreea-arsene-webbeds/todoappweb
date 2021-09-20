@@ -1,17 +1,10 @@
 .container {
-    display: flex;
-    justify-content: center;
-    margin-top: 50px;
-    margin-bottom: 50px;
-}
-
-.todo-list {
-    width: 500px;
+    flex-direction: column;
 }
 
 .count {
-    display: inline;
-    justify-content: space-between;
+    display: flex;
+    justify-content: space-around;
 }
 
 .notDone {

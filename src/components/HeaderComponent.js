@@ -1,16 +1,18 @@
 import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
+import './styles/HeaderStyles.css'
+import AssignmentTurnedInRoundedIcon from '@material-ui/icons/AssignmentTurnedInRounded';
 
 const Header = (props) => {
     return (
       <div>
-        <AppBar position="static" color="secondary">
+        <AppBar position="fixed" color="secondary">
           <Toolbar>
-            <Typography variant="h6">
+            <div className="header">
                 {props.name}'s TODO List
-            </Typography>
+            </div>
+            <AssignmentTurnedInRoundedIcon></AssignmentTurnedInRoundedIcon>
           </Toolbar>
         </AppBar>
       </div>

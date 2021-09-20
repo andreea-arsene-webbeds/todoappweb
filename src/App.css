@@ -1,4 +1,10 @@
-.App {
-  text-align: center;
+.container {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.app {
   font-family: 'Open Sans Condensed', sans-serif;
+  flex-direction: column;
 }

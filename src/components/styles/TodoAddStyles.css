@@ -2,15 +2,12 @@
     display: flex;
     justify-content: center;
     margin-top: 50px;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
+    font-family: 'Open Sans Condensed', sans-serif;
 }
 
 .header {
     display: flex;
     justify-content: space-around;
     width: 500px;
-}
-
-.container {
-    max-width: 600px;
 }

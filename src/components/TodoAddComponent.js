@@ -18,18 +18,23 @@ const TodoAdd = (props) => {
             text: todoText
         }
 
-        DataService.create(todo)
-        .then((response) => {
-            todoListContext.todoDispatch({
-                type: Action.ADD,
-                payload: response.data
-            });
-            setTodoText('')
-        })
+        if(todoText !== '') {
+            DataService.create(todo)
+            .then((response) => {
+                todoListContext.todoDispatch({
+                    type: Action.ADD,
+                    payload: response.data
+                });
+                setTodoText('')
+            })
+        } else {
+            alert("Field cannot be empty!");
+        }
+
     }
 
     return (
-        <div className="container">
+        <div >
             <form className="form">
                 <div className="header">
                     <TextField
